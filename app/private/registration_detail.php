@@ -1,6 +1,6 @@
+<?php require_once '../process.php'; ?>
 <?php include_once '../header.php'; ?>
 <?php include_once 'menu.php'; ?>
-<?php require_once '../process.php'; ?>
 
   <main role="main" class="container">
     <div class="menu-template">

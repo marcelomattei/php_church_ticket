@@ -1,5 +1,5 @@
-<?php include_once '../header.php'; ?>
 <?php require_once '../process.php'; ?>
+<?php include_once '../header.php'; ?>
 
   <?php
     $worships_list = $worship_obj->list_available_worships();

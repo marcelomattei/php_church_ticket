@@ -1,10 +1,9 @@
 <?php 
+    session_start();
     include 'class/reservation.php';
     include 'class/worship.php';
     $reservation_obj = new Reservation();
     $worship_obj = new Worship();
-
-    session_start();
 
     if (isset($_POST['create_reservation'])) {
         $reservation_obj->create_reservation($_POST);
