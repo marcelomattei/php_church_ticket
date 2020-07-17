@@ -11,44 +11,53 @@
         <div class="container">
             <div class="row justify-content-center">
                 <h4>Relatório de reservas: 
-                    <?php echo date('d/m/Y') ?> - <?php echo date('h:i:sa') ?>
+                    <?php echo date('d/m/Y') ?>
                 </h4>
                 &nbsp;
                 <a href="registration.php" class="btn btn-primary">Atualizar</a>
             <div>
             <br>
+        </div>
+        <?php if ($reservation_summary_list->num_rows): ?>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Horário</th>
+                        <th>Quantidade Atual</th>
+                        <th>Limite</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <?php 
+                    while($row = $reservation_summary_list->fetch_assoc()):
+                ?>
+                <tbody>
+                    <tr>
+                        <td>
+                            <?php echo $row['description']; ?> - 
+                                <?php echo date_format(date_create($row['date']),'d/m/Y'); ?> - 
+                                <?php echo $row['hour']; ?>
+                        </td>
+                        <td><?php echo $row['current_qty']; ?></td>
+                        <td><?php echo $row['places']; ?></td>
+                        <td>
+                            <a href="registration_detail.php?detail_reservation_summary=<?php echo $row['id']; ?>"
+                                class="btn btn-success">Detalhar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <?php endwhile; ?>
+            </table>
+        </div>
+        <?php endif; ?>
+    </div>
+    <?php if (!$reservation_summary_list->num_rows): ?>
+        <div class="container">
             <div class="row justify-content-center">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Horário</th>
-                            <th>Quantidade Atual</th>
-                            <th>Limite</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <?php 
-                        while($row = $reservation_summary_list->fetch_assoc()):
-                    ?>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <?php echo $row['description']; ?> - 
-                                    <?php echo date_format(date_create($row['date']),'d/m/Y'); ?> - 
-                                    <?php echo $row['hour']; ?>
-                            </td>
-                            <td><?php echo $row['current_qty']; ?></td>
-                            <td><?php echo $row['places']; ?></td>
-                            <td>
-                                <a href="registration_detail.php?detail_reservation_summary=<?php echo $row['id']; ?>"
-                                    class="btn btn-success">Detalhar</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <?php endwhile; ?>
-                </table>
+                <p>Não foram encontrados registros.</p>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 </main>
 <?php include_once '../footer.php'; ?>
