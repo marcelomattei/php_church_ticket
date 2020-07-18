@@ -16,28 +16,28 @@
         ?>
 
         <div class="container">
-        <div class="row justify-content-center">
-            <table class="table table-bordered">
-                <thead>
+            <div class="row justify-content-center">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Horário</th>
+                            <th>Limite</th>
+                        </tr>
+                    </thead>
+                    <?php 
+                        while($row = $result_header->fetch_assoc()):
+                    ?>
                     <tr>
-                        <th>Horário</th>
-                        <th>Limite</th>
+                        <td>
+                            <?php echo $row['description']; ?> - 
+                                <?php echo date_format(date_create($row['date']),'d/m/Y'); ?> - 
+                                <?php echo $row['hour']; ?>
+                        </td>
+                        <td><?php echo $row['places']; ?></td>
                     </tr>
-                </thead>
-                <?php 
-                    while($row = $result_header->fetch_assoc()):
-                ?>
-                <tr>
-                    <td>
-                        <?php echo $row['description']; ?> - 
-                            <?php echo date_format(date_create($row['date']),'d/m/Y'); ?> - 
-                            <?php echo $row['hour']; ?>
-                    </td>
-                    <td><?php echo $row['places']; ?></td>
-                </tr>
-                <?php endwhile; ?>
-            </table>
-        </div>
+                    <?php endwhile; ?>
+                </table>
+            </div>
         <br>
         <div class="row justify-content-center">
             <table class="table table-striped">

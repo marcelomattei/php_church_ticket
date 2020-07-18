@@ -41,10 +41,10 @@
                                 id="inputWorshipDate" aria-describedby="worshipDateHelp" placeholder="Data" required>
                             <small id="worshipDateHelp" class="form-text text-muted">Informe a data do culto.</small>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-md-6 mb-3">
                             <label for="inputPlaces">Lugares:</label>
                             <input type="number" autocomplete="off" size="2" class="form-control" name="places"
-                            min="1" max="99"
+                                min="1" max="99"
                                 id="inputPlaces" aria-describedby="placesHelp" placeholder="Lugares" required>
                             <small id="placesHelp" class="form-text text-muted">Informe o número de lugares disponíveis.</small>
                         </div>
@@ -53,8 +53,8 @@
                 </form>
             </div>
             <br>
-            <div>
-                <table class="table">
+            <div class="row">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Descrição</th>

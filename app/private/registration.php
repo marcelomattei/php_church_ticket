@@ -7,24 +7,23 @@
     <?php
         $reservation_summary_list = $reservation_obj->list_summary_active_reservations();
     ?>
-
+        <a href="registration.php" class="btn btn-primary">Atualizar</a>
+        <br>
         <div class="container">
             <div class="row justify-content-center">
-                <h4>Relatório de reservas: 
+                <p><b>Relatório de reservas: </b>
                     <?php echo date('d/m/Y') ?>
-                </h4>
-                &nbsp;
-                <a href="registration.php" class="btn btn-primary">Atualizar</a>
+                </p>
             <div>
-            <br>
         </div>
         <?php if ($reservation_summary_list->num_rows): ?>
-        <div>
-            <table class="table">
+        <div class="container">
+            <div class="row justify-content-center">
+                <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Horário</th>
-                        <th>Quantidade Atual</th>
+                        <th>Atual</th>
                         <th>Limite</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -50,7 +49,8 @@
                 <?php endwhile; ?>
             </table>
         </div>
-        <?php endif; ?>
+    </div>
+    <?php endif; ?>
     </div>
     <?php if (!$reservation_summary_list->num_rows): ?>
         <div class="container">
