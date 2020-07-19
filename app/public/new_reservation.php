@@ -12,7 +12,7 @@
           <div class="card">
             <div class="card-body">
               <h5 style="color:red;" class="card-title"><b>Importante</b></h5>
-              <p style="color:red;" class="card-text">Para segurança de todos, os membros devem ter entre <b>12</b> e <b>60</b> anos.</p>
+              <p style="color:red;" class="card-text">Para a segurança de todos, inscreva-se, somente, se sua idade estiver entre <b>12</b> e <b>60</b> anos.</p>
             </div>
           </div>
         </div>
@@ -29,14 +29,19 @@
             <?php endif ?>
             <br>
             <div id="first_step_reservation" class="row">
-                <div class="form-group col-md-4 mb-3">
-                    <label for="inputQuantity">Quantidade:</label>
-                    <input type="number" autocomplete="off" class="form-control" name="quantity" id="inputQuantity" 
-                      min="1" max="99"
-                      aria-describedby="quantityHelp" placeholder="Quantidade" required>
-                    <small id="quantityHelp" class="form-text text-muted">Informe a quantidade de membros no culto.</small>
+                <div class="form-group col-md-6 mb-3">
+                    <label for="inputQuantity">Quantas pessoas você quer inscrever? (Limite de 5 pessoas):</label>
+                    <select name="quantity" class="form-control" id="inputQuantity" required>
+                        <option selected="selected" value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <small id="quantityHelp" class="form-text text-muted">
+                    Quantidade de pessoas que deseja inscrever (conte você e alguns outros familiares, por exemplo)</small>
                 </div>
-                <div class="form-group col-md-8 mb-3">
+                <div class="form-group col-md-6 mb-3">
                     <label for="selectReservationDate">Horário:</label>
                     <select name="worship_id" class="form-control" id="selectReservationDate" required>
                         <option selected="selected"></option>
@@ -53,17 +58,7 @@
                 </div>
               </div>
               <button type="button" class="btn btn-primary" id="btn_proceed_reservation" name="proceed_reservation">Prosseguir</button>
-              <div id="second_step_reservation" class="row">
-                <div class="form-group col-md-8 mb-3">
-                    <label for="inputName">Nome:</label>
-                    <input type="text" autocomplete="off" size="75" class="form-control" name="name" id="inputName" aria-describedby="nameHelp" placeholder="Nome" required>
-                    <small id="nameHelp" class="form-text text-muted">Informe seu nome completo.</small>
-                </div>
-                <div class="form-group col-md-4 mb-3">
-                    <label for="inputTaxId">RG:</label>
-                    <input type="text" autocomplete="off" size="15" class="form-control" name="taxId" id="inputTaxId" aria-describedby="taxIdHelp" placeholder="RG" required>
-                    <small id="taxIdHelp" class="form-text text-muted">Informe seu número de RG.</small>
-                </div>
+              <div id="second_step_reservation">
               </div>
               <button type="submit" class="btn btn-primary" id="btn_finish_reservation" name="create_reservation">Finalizar</button>
           </form>
@@ -72,15 +67,4 @@
     </div>
   </main>
   <?php include_once '../footer.php'; ?>
-  <script>
-    $( document ).ready(function() {
-      $("#second_step_reservation").hide();
-      $("#btn_finish_reservation").hide();
-    });
-
-    $("#btn_proceed_reservation").click(function(){
-       $("#btn_proceed_reservation").hide();
-       $("#second_step_reservation").show();
-       $("#btn_finish_reservation").show();
-    })
-  </script>
+  <?php include_once '../assets/js/dynamic_reservation.js'; ?>

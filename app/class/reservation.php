@@ -4,7 +4,7 @@
 
         function __construct() {
             $servername = 'localhost';
-            $dbname = 'ibr_event_ticket';
+            $dbname = 'ibv_event_ticket';
             $username = 'root';
             $password = '';
 
@@ -39,21 +39,24 @@
         }
 
         public function create_reservation($post_data=array()) {
-            $name = mysqli_real_escape_string($this->conn, trim($post_data['name']));
-            $taxId = mysqli_real_escape_string($this->conn, trim($post_data['taxId']));
             $quantity = mysqli_real_escape_string($this->conn, trim($post_data['quantity']));
             $worship_id = mysqli_real_escape_string($this->conn, trim($post_data['worship_id']));
 
             if ($this->is_registration_valid($quantity, $worship_id)) {
-                $result = $this->conn->query("insert into worship_registration (name, tax_id, quantity, worship_id) 
-                                values ('$name', '$taxId', $quantity, $worship_id)");
+                for($i = 0; $i < $quantity; $i++) {
+                    $name = mysqli_real_escape_string($this->conn, trim($post_data['name'][$i]));
+                    $taxId = mysqli_real_escape_string($this->conn, trim($post_data['taxId'][$i]));
+                    
+                    $result = $this->conn->query("insert into worship_registration (name, tax_id, quantity, worship_id) 
+                                    values ('$name', '$taxId', 1, $worship_id)");
 
-                if ($result) {
-                    $_SESSION['message'] = "Registro foi realizado com sucesso!";
-                    $_SESSION['msg_type'] = "success";
-                } else {
-                    $_SESSION['message'] = "Não foi possível realizar o registro!";
-                    $_SESSION['msg_type'] = "danger";
+                    if ($result) {
+                        $_SESSION['message'] = "Registro foi realizado com sucesso!";
+                        $_SESSION['msg_type'] = "success";
+                    } else {
+                        $_SESSION['message'] = "Não foi possível realizar o registro!";
+                        $_SESSION['msg_type'] = "danger";
+                    }
                 }
             }
         }
@@ -62,9 +65,7 @@
             $sql = "SELECT w.id, sum(r.quantity) as current_qty, w.description, w.hour, w.date, w.places 
                         FROM worship_registration r
                             inner join worship w on w.id = r.worship_id
-                    where (w.date >= current_date)
-                        or (w.date = current_date and w.hour >= current_time)
-                    group by w.id, w.description, w.hour, w.date, w.places order by w.id";
+                    group by w.id, w.description, w.hour, w.date, w.places order by w.id desc";
             $result=  $this->conn->query($sql);
             return $result;
         }

@@ -4,7 +4,7 @@
 
         function __construct() {
             $servername = 'localhost';
-            $dbname = 'ibr_event_ticket';
+            $dbname = 'ibv_event_ticket';
             $username = 'root';
             $password = '';
 
@@ -18,7 +18,7 @@
 
         public function list_available_worships() {
             $sql = "select *  from worship
-                        where (date >= current_date)
+                        where (date > current_date)
                         or (date = current_date and hour >= current_time)";
             $result = $this->conn->query($sql);
             return $result;
